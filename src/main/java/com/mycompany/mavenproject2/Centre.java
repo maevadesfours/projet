@@ -21,17 +21,21 @@ public class Centre extends Box {
     private BoxEntrées BoxE;
     private BoxPlats BoxP;
     private BoxDesserts BoxD;
-    
+    //private JPannel3 JP3;
     
     public Centre(){
         super(BoxLayout.LINE_AXIS);
         this.setUpAndDisplay();
         
-        JPanel panel = new JPanel ();
+        /*
+        panel = new JPanel ();
         panel.setBounds(40,50,150,150);
         panel.setBackground(Color.MAGENTA);
+        panel.setOpaque(true);
+        //panel.setBorderPainted(false);
+        this.add(panel);*/
         
-        this.add(panel);
+        
     }    
         
     public void setUpAndDisplay(){
@@ -39,11 +43,13 @@ public class Centre extends Box {
         BoxE = new BoxEntrées();
         BoxP = new BoxPlats();
         BoxD = new BoxDesserts();
+        //JP3 = new JPannel3();
        
        
         this.add(BoxE);
         this.add(BoxP);
         this.add(BoxD);
+        //this.add(JP3);
         
     }
 }
