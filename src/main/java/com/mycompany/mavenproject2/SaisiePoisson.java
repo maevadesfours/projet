@@ -16,17 +16,21 @@ import javax.swing.JTextField;
  */
 public class SaisiePoisson extends JPanel {
     
+    private JTextField poisson;
+    private JTextField qt;
+    
     public SaisiePoisson(){
        
-        JTextField plats = new JTextField ("   Poisson du jour    ");
-        plats.setLayout(new FlowLayout());
+        JTextField poisson = new JTextField ("   Poisson du jour    ");
+        poisson.setLayout(new FlowLayout());
          
-        plats.setBackground(Color.GRAY);
-        plats.setOpaque(true);
-        plats.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 15));
+        poisson.setBackground(Color.GRAY);
+        poisson.setOpaque(true);
+        poisson.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 15));
         
         
-        this.add(plats);
+        this.add(poisson);
+        this.poisson=poisson;
         
         JTextField quantité = new JTextField ("Qt ");
         quantité.setLayout(new FlowLayout());
@@ -37,6 +41,16 @@ public class SaisiePoisson extends JPanel {
         
         
         this.add(quantité);
+        this.qt=quantité;
     }
+
+    public JTextField getPoisson() {
+        return poisson;
+    }
+
+    public JTextField getQt() {
+        return qt;
+    }
+    
 }
 

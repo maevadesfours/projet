@@ -16,17 +16,21 @@ import javax.swing.JTextField;
  */
 public class SaisieD extends JPanel {
     
+    private JTextField desserts;
+    private JTextField qt;
+    
     public SaisieD(){
        
-        JTextField plats = new JTextField (" Saisissez un dessert  ");
-        plats.setLayout(new FlowLayout());
+        JTextField desserts = new JTextField (" Saisissez un dessert  ");
+        desserts.setLayout(new FlowLayout());
          
-        plats.setBackground(Color.GRAY);
-        plats.setOpaque(true);
-        plats.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 15));
+        desserts.setBackground(Color.GRAY);
+        desserts.setOpaque(true);
+        desserts.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 15));
         
         
-        this.add(plats);
+        this.add(desserts);
+        this.desserts=desserts;
         
         JTextField quantité = new JTextField ("Qt ");
         quantité.setLayout(new FlowLayout());
@@ -37,5 +41,18 @@ public class SaisieD extends JPanel {
         
         
         this.add(quantité);
+        this.qt=quantité;
     }
+
+    public JTextField getDesserts() {
+        return desserts;
+    }
+
+    
+    
+
+    public JTextField getQt() {
+        return qt;
+    }
+    
 }

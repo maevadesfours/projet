@@ -46,12 +46,28 @@ public class BoxPlats extends Box{
         saisie2 = new SaisieP();
         saisie3 = new SaisiePoisson();
         
-       
+        this.saisie1 = saisie1;
+        this.saisie2 = saisie2;
+        this.saisie3 = saisie3;
    
         this.add(saisie1);
         this.add(saisie2);
         this.add(saisie3);
         
     }
+
+    public SaisieP getSaisie1() {
+        return saisie1;
+    }
+
+    public SaisieP getSaisie2() {
+        return saisie2;
+    }
+
+    public SaisiePoisson getSaisie3() {
+        return saisie3;
+    }
+    
+    
 }
 

@@ -18,6 +18,10 @@ import javax.swing.JTextField;
  */
 public class Saisie extends JPanel {
     
+    private JTextField entree;
+    private JTextField qt;
+    
+    
     public Saisie(){
        
         JTextField entrée = new JTextField ("Saisissez une entrée ");
@@ -31,6 +35,7 @@ public class Saisie extends JPanel {
             entrée.setFont(police);*/
         
         this.add(entrée);
+        this.entree=entrée;
         
         JTextField quantité = new JTextField ("Qt ");
         quantité.setLayout(new FlowLayout());
@@ -43,5 +48,15 @@ public class Saisie extends JPanel {
             entrée.setFont(police);*/
         
         this.add(quantité);
+        this.qt=quantité;
     }
+
+    public JTextField getEntree() {
+        return entree;
+    }
+
+    public JTextField getQt() {
+        return qt;
+    }
+    
 }

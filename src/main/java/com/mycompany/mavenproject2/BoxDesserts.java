@@ -52,6 +52,10 @@ public class BoxDesserts extends Box{
         saisie3 = new SaisieD();
         saisie4 = new SaisieD();
        
+        this.saisie1 = saisie1;
+        this.saisie2 = saisie2;
+        this.saisie3 = saisie3;
+        this.saisie4 = saisie4;
    
         this.add(saisie1);
         this.add(saisie2);
@@ -60,4 +64,21 @@ public class BoxDesserts extends Box{
         
     
     }
+
+    public SaisieD getSaisie1() {
+        return saisie1;
+    }
+
+    public SaisieD getSaisie2() {
+        return saisie2;
+    }
+
+    public SaisieD getSaisie3() {
+        return saisie3;
+    }
+
+    public SaisieD getSaisie4() {
+        return saisie4;
+    }
+    
 }

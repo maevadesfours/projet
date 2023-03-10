@@ -51,8 +51,43 @@ public class Fenetre extends JFrame{
     this.setLocationRelativeTo(null);
     this.setVisible(true);
     
+    sud.getAnnulé().addActionListener(l -> {
+        centre.getBoxE().getSaisie1().getEntree().setText("Saisissez une entrée ");
+        centre.getBoxE().getSaisie2().getEntree().setText("Saisissez une entrée ");
+        centre.getBoxE().getSaisie3().getEntree().setText("Saisissez une entrée ");
+        centre.getBoxE().getSaisie4().getEntree().setText("Saisissez une entrée ");
+        
+        centre.getBoxP().getSaisie1().getPlats().setText("    Saisissez un plat     ");
+        centre.getBoxP().getSaisie2().getPlats().setText("    Saisissez un plat     ");
+        centre.getBoxP().getSaisie3().getPoisson().setText("   Poisson du jour    ");
+        
+        centre.getBoxD().getSaisie1().getDesserts().setText("Saisissez un dessert ");
+        centre.getBoxD().getSaisie2().getDesserts().setText("Saisissez un dessert ");
+        centre.getBoxD().getSaisie3().getDesserts().setText("Saisissez un dessert ");
+        centre.getBoxD().getSaisie4().getDesserts().setText("Saisissez un dessert ");
+        
+        
+        
+        centre.getBoxE().getSaisie1().getQt().setText("Qt ");
+        centre.getBoxE().getSaisie2().getQt().setText("Qt ");
+        centre.getBoxE().getSaisie3().getQt().setText("Qt ");
+        centre.getBoxE().getSaisie4().getQt().setText("Qt ");
+        
+        centre.getBoxP().getSaisie1().getQt().setText("Qt ");
+        centre.getBoxP().getSaisie2().getQt().setText("Qt ");
+        centre.getBoxP().getSaisie3().getQt().setText("Qt ");
+        
+        
+        centre.getBoxD().getSaisie1().getQt().setText("Qt ");
+        centre.getBoxD().getSaisie2().getQt().setText("Qt ");
+        centre.getBoxD().getSaisie3().getQt().setText("Qt ");
+        centre.getBoxD().getSaisie4().getQt().setText("Qt ");
+        
+    });
     }
-  
+    sud.getAnnulé().addActionListener(l -> {
+        String nomEntrée1 = centre.getBoxE().getSaisie1().getEntree().getText();
+    
   } 
     
 

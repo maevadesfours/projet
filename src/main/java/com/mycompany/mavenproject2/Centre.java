@@ -45,11 +45,27 @@ public class Centre extends Box {
         BoxD = new BoxDesserts();
         //JP3 = new JPannel3();
        
-       
+        this.BoxE = BoxE;
+        this.BoxP = BoxP;
+        this.BoxD = BoxD;
+        
         this.add(BoxE);
         this.add(BoxP);
         this.add(BoxD);
         //this.add(JP3);
         
     }
+
+    public BoxEntrées getBoxE() {
+        return BoxE;
+    }
+
+    public BoxPlats getBoxP() {
+        return BoxP;
+    }
+
+    public BoxDesserts getBoxD() {
+        return BoxD;
+    }
+ 
 }

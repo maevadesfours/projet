@@ -56,14 +56,33 @@ public class BoxEntrées extends Box{
         saisie3 = new Saisie();
         saisie4 = new Saisie();
        
+        this.saisie1 = saisie1;
+        this.saisie2 = saisie2;
+        this.saisie3 = saisie3;
+        this.saisie4 = saisie4;
    
         this.add(saisie1);
         this.add(saisie2);
         this.add(saisie3);
         this.add(saisie4);
-        
-        
-        
-    
+      
     }
+
+
+    public Saisie getSaisie1() {
+        return saisie1;
+    }
+
+    public Saisie getSaisie2() {
+        return saisie2;
+    }
+
+    public Saisie getSaisie3() {
+        return saisie3;
+    }
+
+    public Saisie getSaisie4() {
+        return saisie4;
+    }
+    
 }

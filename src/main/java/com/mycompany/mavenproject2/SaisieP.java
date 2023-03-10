@@ -16,6 +16,9 @@ import javax.swing.JTextField;
  */
 public class SaisieP extends JPanel {
     
+    private JTextField plats;
+    private JTextField qt;
+    
     public SaisieP(){
        
         JTextField plats = new JTextField ("    Saisissez un plat     ");
@@ -27,6 +30,7 @@ public class SaisieP extends JPanel {
         
         
         this.add(plats);
+        this.plats = plats;
         
         JTextField quantité = new JTextField ("Qt ");
         quantité.setLayout(new FlowLayout());
@@ -37,5 +41,15 @@ public class SaisieP extends JPanel {
         
         
         this.add(quantité);
+        this.qt=quantité;
     }
+
+    public JTextField getPlats() {
+        return plats;
+    }
+
+    public JTextField getQt() {
+        return qt;
+    }
+    
 }

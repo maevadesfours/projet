@@ -23,6 +23,9 @@ import javax.swing.JPanel;
  */
 public class Sud extends JPanel {
     
+    private JButton annulé;
+    private JButton validé;
+    
     public Sud(){
        
         JButton valider = new JButton ("Valider le menu");
@@ -36,6 +39,7 @@ public class Sud extends JPanel {
             valider.setFont(police);
         
         this.add(valider);
+        this.validé = valider;
         
    
         JButton annuler = new JButton ("Annuler");
@@ -49,6 +53,17 @@ public class Sud extends JPanel {
             annuler.setFont(police1);
         annuler.setLayout(new FlowLayout());
         this.add(annuler);
-    
+        this.annulé = annuler;
+        
+        
      } 
+
+    public JButton getAnnulé() {
+        return annulé;
+    }
+
+    public JButton getValidé() {
+        return validé;
+    }
+    
 }
