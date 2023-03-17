@@ -9,13 +9,12 @@ package com.mycompany.mavenproject2;
  * @author maevadesfours
  */
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
+import java.awt.ActiveEvent;
+import java.util.ArrayList;
+
 
 public class Fenetre extends JFrame{
     
@@ -25,7 +24,9 @@ public class Fenetre extends JFrame{
     private Nord nord ;
     private Sud sud; 
     private Centre centre;
-    
+    private ArrayList<Plat> starters = new ArrayList<Plat>();
+    private ArrayList<Plat> main_courses = new ArrayList<Plat>();
+    private ArrayList<Plat> desserts = new ArrayList<Plat>();
     
     public Fenetre(){
         super("el ristorante");
@@ -84,12 +85,34 @@ public class Fenetre extends JFrame{
         centre.getBoxD().getSaisie4().getQt().setText("Qt ");
         
     });
-    }
-    sud.getAnnulé().addActionListener(l -> {
-        String nomEntrée1 = centre.getBoxE().getSaisie1().getEntree().getText();
+    
+    sud.getValidé().addActionListener(e -> {
+        
+        try {
+        starters.add(new Plat (starters.size()+1,"Entrée",centre.getBoxE().getSaisie1().getEntree().getText(),Integer.parseInt(centre.getBoxE().getSaisie1().getQt().getText())));
+        starters.add( new Plat (starters.size()+1,"Entrée",centre.getBoxE().getSaisie2().getEntree().getText(),Integer.parseInt(centre.getBoxE().getSaisie2().getQt().getText())));
+        starters.add( new Plat (starters.size()+1,"Entrée",centre.getBoxE().getSaisie3().getEntree().getText(),Integer.parseInt(centre.getBoxE().getSaisie3().getQt().getText())));
+        starters.add( new Plat (starters.size()+1,"Entrée",centre.getBoxE().getSaisie4().getEntree().getText(),Integer.parseInt(centre.getBoxE().getSaisie4().getQt().getText())));
+        
+        main_courses.add(new Plat (main_courses.size()+1,"Plat",centre.getBoxP().getSaisie1().getPlats().getText(),Integer.parseInt(centre.getBoxP().getSaisie1().getQt().getText())));
+        main_courses.add(new Plat (main_courses.size()+1,"Plat",centre.getBoxP().getSaisie2().getPlats().getText(),Integer.parseInt(centre.getBoxP().getSaisie2().getQt().getText())));
+        main_courses.add(new Plat (main_courses.size()+1,"Plat",centre.getBoxP().getSaisie3().getPoisson().getText(),Integer.parseInt(centre.getBoxP().getSaisie3().getQt().getText())));
+    
+        
+        desserts.add(new Plat (desserts.size()+1,"Dessert",centre.getBoxD().getSaisie1().getDesserts().getText(),Integer.parseInt(centre.getBoxD().getSaisie1().getQt().getText())));
+        desserts.add(new Plat (desserts.size()+1, "Dessert",centre.getBoxD().getSaisie2().getDesserts().getText(),Integer.parseInt(centre.getBoxD().getSaisie2().getQt().getText())));
+        desserts.add(new Plat (desserts.size()+1,"Dessert",centre.getBoxD().getSaisie3().getDesserts().getText(),Integer.parseInt(centre.getBoxD().getSaisie3().getQt().getText())));
+        desserts.add(new Plat (desserts.size()+1,"Dessert",centre.getBoxD().getSaisie4().getDesserts().getText(),Integer.parseInt(centre.getBoxD().getSaisie4().getQt().getText())));
+        }
+        
+        catch (NumberFormatException n){
+            System.out.println("les quantités doivent être des entiers");     
+                }
+        catch (QuantityException x){
+            System.out.println(x);
+        }
+    });
     
   } 
-    
-
-    
-
+}
+  
