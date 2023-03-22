@@ -10,12 +10,17 @@ package com.mycompany.mavenproject2;
  */
 import static com.sun.management.HotSpotDiagnosticMXBean.ThreadDumpFormat.JSON;
 import java.awt.BorderLayout;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.StringReader;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -87,6 +92,7 @@ public class Fenetre extends JFrame {
             try {
                 Plat s1 = new Plat(starters.size() + 1, "Entrée", centre.getBoxE().getSaisie1().getEntree().getText(), Integer.parseInt(centre.getBoxE().getSaisie1().getQt().getText().trim()));
                 starters.add(s1);
+                //System.out.println(s1.toJson());
                 Plat s2 = new Plat(starters.size() + 1, "Entrée", centre.getBoxE().getSaisie2().getEntree().getText(), Integer.parseInt(centre.getBoxE().getSaisie2().getQt().getText().trim()));
                 starters.add(s2);
                 Plat s3 = new Plat(starters.size() + 1, "Entrée", centre.getBoxE().getSaisie3().getEntree().getText(), Integer.parseInt(centre.getBoxE().getSaisie3().getQt().getText().trim()));
@@ -104,27 +110,26 @@ public class Fenetre extends JFrame {
                 desserts.add(new Plat(desserts.size() + 1, "Dessert", centre.getBoxD().getSaisie4().getDesserts().getText(), Integer.parseInt(centre.getBoxD().getSaisie4().getQt().getText().trim())));
                 
                 
-                String document = "[{\n"
-                 + "\"projet\n";
-                try (JSON reader = JSON.createReader(new StringReader(document))) {
-                JSONArray array = reader.readArray();
-                JSONObject obj = array.getJSONObject(1);
-                String nom = obj.getJsonString("nom").getString();
-                }
+                FileWriter fichier = new FileWriter ("menu.json");
+                
                 
                 JSONObject json = new JSONObject();
+                 
                 JSONArray st = new JSONArray();
-                st.add(s1);
-                st.add(s2);
-                st.add(s3);
-                st.add(s4);
+                st.add(s1.toJson());
+                st.add(s2.toJson());
+                st.add(s3.toJson());
+                st.add(s4.toJson());
                 json.put("starters", st);
-                System.out.println(json);
+                
+                json.writeJSONString(fichier);
                
             } catch (NumberFormatException n) {
                 JOptionPane.showMessageDialog(this, "les quantités doivent être des entiers");
             } catch (QuantityException x) {
                 System.out.println(x);
+            } catch (IOException ex) {
+                Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
             }
         
         });

@@ -4,6 +4,8 @@
  */
 package com.mycompany.mavenproject2;
 
+import org.json.simple.JSONObject;
+
 /**
  *
  * @author maevadesfours
@@ -46,6 +48,15 @@ public class Plat  {
 
     public void setType(String type) {
         this.type = type;
+    }
+    
+    public String toJson() {
+        
+        JSONObject obj = new JSONObject();
+        obj.put("id", id);
+        obj.put("description", nomPlat);
+        obj.put("qty", qtPlat);
+        return obj.toString();
     }
     
 }
