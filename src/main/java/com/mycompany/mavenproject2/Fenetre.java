@@ -8,11 +8,10 @@ package com.mycompany.mavenproject2;
  *
  * @author maevadesfours
  */
-import static com.sun.management.HotSpotDiagnosticMXBean.ThreadDumpFormat.JSON;
+
 import java.awt.BorderLayout;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.StringReader;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
