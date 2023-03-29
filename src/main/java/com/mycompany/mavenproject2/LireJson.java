@@ -7,6 +7,8 @@ package com.mycompany.mavenproject2;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -17,18 +19,23 @@ import org.json.simple.parser.ParseException;
  */
 public class LireJson {
     
+    JSONObject OrderPart orderpart;
+    
     public static void LireJson() {    
     JSONParser jsonP = new JSONParser();
     
     try {
-    JSONObject jsonO = (JSONObject)jsonP.parse(new FileReader("C:/restaurant_exemple_commande.json"));
+    JSONObject jsonO = (JSONObject)jsonP.parse(new FileReader("restaurant_exemple_commande.json"));
     
-         String id = (String)jsonO.get("id");
-         String qty = (String)jsonO.get("qty");
-         //String address = (String) jsonO.get("address");
+         JSONArray starters = JSONArray.get("starters");
+            for (JSONObject obj: starters){
+                OderPart entree = new OderPart (obj);
+                System.out.println(OderPart);
+            }
+         
          System.out.println("id :"+ id);
          System.out.println("qty: "+ qty);
-         //System.out.println("Address: "+ address);
+         
       } catch (FileNotFoundException e) {
          e.printStackTrace();
       } catch (IOException e) {
@@ -36,6 +43,8 @@ public class LireJson {
       } catch (ParseException e) {
          e.printStackTrace();
       }
+    
+    
    }
     
 }
