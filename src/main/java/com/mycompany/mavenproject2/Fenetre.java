@@ -9,9 +9,11 @@ package com.mycompany.mavenproject2;
  * @author maevadesfours
  */
 
+import static com.sun.management.HotSpotDiagnosticMXBean.ThreadDumpFormat.JSON;
 import java.awt.BorderLayout;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -22,6 +24,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 public class Fenetre extends JFrame {
 
@@ -33,6 +36,7 @@ public class Fenetre extends JFrame {
     private final ArrayList<Plat> starters = new ArrayList<>();
     private final ArrayList<Plat> main_courses = new ArrayList<>();
     private final ArrayList<Plat> desserts = new ArrayList<>();
+    private LireJson lireJson;
 
     public Fenetre() {
         super("el ristorante");
@@ -99,18 +103,25 @@ public class Fenetre extends JFrame {
                 Plat s4 = new Plat(starters.size() + 1, "Entrée", centre.getBoxE().getSaisie4().getEntree().getText(), Integer.parseInt(centre.getBoxE().getSaisie4().getQt().getText().trim()));
                 starters.add(s4);
 
-                main_courses.add(new Plat(main_courses.size() + 1, "Plat", centre.getBoxP().getSaisie1().getPlats().getText(), Integer.parseInt(centre.getBoxP().getSaisie1().getQt().getText().trim())));
-                main_courses.add(new Plat(main_courses.size() + 1, "Plat", centre.getBoxP().getSaisie2().getPlats().getText(), Integer.parseInt(centre.getBoxP().getSaisie2().getQt().getText().trim())));
-                main_courses.add(new Plat(main_courses.size() + 1, "Plat", centre.getBoxP().getSaisie3().getPoisson().getText(), Integer.parseInt(centre.getBoxP().getSaisie3().getQt().getText().trim())));
+                Plat mc1 = new Plat(main_courses.size() + 1, "Plat", centre.getBoxP().getSaisie1().getPlats().getText(), Integer.parseInt(centre.getBoxP().getSaisie1().getQt().getText().trim()));
+                main_courses.add(mc1);
+                Plat mc2 = new Plat(main_courses.size() + 1, "Plat", centre.getBoxP().getSaisie2().getPlats().getText(), Integer.parseInt(centre.getBoxP().getSaisie2().getQt().getText().trim()));
+                main_courses.add(mc2);
+                Plat mc3 = new Plat(main_courses.size() + 1, "Plat", centre.getBoxP().getSaisie3().getPoisson().getText(), Integer.parseInt(centre.getBoxP().getSaisie3().getQt().getText().trim()));
+                main_courses.add(mc3);
 
-                desserts.add(new Plat(desserts.size() + 1, "Dessert", centre.getBoxD().getSaisie1().getDesserts().getText(), Integer.parseInt(centre.getBoxD().getSaisie1().getQt().getText().trim())));
-                desserts.add(new Plat(desserts.size() + 1, "Dessert", centre.getBoxD().getSaisie2().getDesserts().getText(), Integer.parseInt(centre.getBoxD().getSaisie2().getQt().getText().trim())));
-                desserts.add(new Plat(desserts.size() + 1, "Dessert", centre.getBoxD().getSaisie3().getDesserts().getText(), Integer.parseInt(centre.getBoxD().getSaisie3().getQt().getText().trim())));
-                desserts.add(new Plat(desserts.size() + 1, "Dessert", centre.getBoxD().getSaisie4().getDesserts().getText(), Integer.parseInt(centre.getBoxD().getSaisie4().getQt().getText().trim())));
+                Plat d1 = new Plat(desserts.size() + 1, "Dessert", centre.getBoxD().getSaisie1().getDesserts().getText(), Integer.parseInt(centre.getBoxD().getSaisie1().getQt().getText().trim()));
+                desserts.add(d1);
+                Plat d2 = new Plat(desserts.size() + 1, "Dessert", centre.getBoxD().getSaisie2().getDesserts().getText(), Integer.parseInt(centre.getBoxD().getSaisie2().getQt().getText().trim()));
+                desserts.add(d2);
+                Plat d3 = new Plat(desserts.size() + 1, "Dessert", centre.getBoxD().getSaisie3().getDesserts().getText(), Integer.parseInt(centre.getBoxD().getSaisie3().getQt().getText().trim()));
+                desserts.add(d3);
+                Plat d4 = new Plat(desserts.size() + 1, "Dessert", centre.getBoxD().getSaisie4().getDesserts().getText(), Integer.parseInt(centre.getBoxD().getSaisie4().getQt().getText().trim()));
+                desserts.add(d4);
                 
                 
-                FileWriter fichier = new FileWriter ("menu.json");
-                
+                try (PrintWriter out = new PrintWriter(new FileWriter("menu.json"))) {
+                //FileWriter fichier = new FileWriter ("menu.json");
                 
                 JSONObject json = new JSONObject();
                  
@@ -119,20 +130,37 @@ public class Fenetre extends JFrame {
                 st.add(s2.toJson());
                 st.add(s3.toJson());
                 st.add(s4.toJson());
+                
                 json.put("starters", st);
                 
-                json.writeJSONString(fichier);
-               
-            } catch (NumberFormatException n) {
-                JOptionPane.showMessageDialog(this, "les quantités doivent être des entiers");
-            } catch (QuantityException x) {
-                System.out.println(x);
-            } catch (IOException ex) {
+                JSONArray mc = new JSONArray();
+                mc.add(mc1.toJson());
+                mc.add(mc2.toJson());
+                mc.add(mc3.toJson());
+                
+                json.put("main_courses", mc);
+                
+                JSONArray d = new JSONArray();
+                d.add(d1.toJson());
+                d.add(d2.toJson());
+                d.add(d3.toJson());
+                d.add(d4.toJson());
+                
+                json.put("desserts", d);
+                
+                json.writeJSONString(out);
+                // System.out.printf(JSON.toString());
+                out.close();
+                
+                } catch (Exception w) {
+                w.printStackTrace();
+            }
+            } catch (QuantityException ex) {
                 Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
             }
-        
         });
         
-
+        lireJson.LireJson();
+        
     }
 }

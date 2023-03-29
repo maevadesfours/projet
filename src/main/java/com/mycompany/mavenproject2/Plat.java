@@ -50,13 +50,15 @@ public class Plat  {
         this.type = type;
     }
     
-    public String toJson() {
+    public JSONObject toJson() {
         
         JSONObject obj = new JSONObject();
+        
         obj.put("id", id);
         obj.put("description", nomPlat);
         obj.put("qty", qtPlat);
-        return obj.toString();
+        
+        return obj;
     }
     
 }
