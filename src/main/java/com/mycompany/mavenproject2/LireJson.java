@@ -39,6 +39,8 @@ public class LireJson {
             for (Object obj: main_courses){
                 OrderPart plats = new OrderPart ((JSONObject) obj);
                 System.out.println(plats);
+          
+                
             }
             
         JSONArray desserts = (JSONArray) jsonO.get("desserts");
@@ -58,5 +60,6 @@ public class LireJson {
     
     
    }
+
     
 }

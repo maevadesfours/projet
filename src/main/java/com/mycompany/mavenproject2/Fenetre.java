@@ -8,7 +8,6 @@ package com.mycompany.mavenproject2;
  *
  * @author maevadesfours
  */
-
 import static com.sun.management.HotSpotDiagnosticMXBean.ThreadDumpFormat.JSON;
 import java.awt.BorderLayout;
 import java.io.FileWriter;
@@ -93,74 +92,135 @@ public class Fenetre extends JFrame {
         sud.getValidé().addActionListener(e -> {
 
             try {
-                Plat s1 = new Plat(starters.size() + 1, "Entrée", centre.getBoxE().getSaisie1().getEntree().getText(), Integer.parseInt(centre.getBoxE().getSaisie1().getQt().getText().trim()));
+                //récupérer le nom et la qt des :
+                //ENTREES 
+
+                String nomEntree1 = centre.getBoxE().getSaisie1().getEntree().getText();
+                //permet de retrouver le nom de l'entrée saisie par l'utilisateur 
+                int qtEntree1 = Integer.parseInt(centre.getBoxE().getSaisie1().getQt().getText().trim());
+                //permet de retrouver la quantité d'entrée saisie par l'utilisateur 
+
+                Plat s1 = new Plat(1, "Entrée", nomEntree1, qtEntree1);
                 starters.add(s1);
+                //code utilisé pour tester le bon fonctionnmenet des guetters
                 //System.out.println(s1.toJson());
-                Plat s2 = new Plat(starters.size() + 1, "Entrée", centre.getBoxE().getSaisie2().getEntree().getText(), Integer.parseInt(centre.getBoxE().getSaisie2().getQt().getText().trim()));
+
+                String nomEntree2 = centre.getBoxE().getSaisie2().getEntree().getText();
+                int qtEntree2 = Integer.parseInt(centre.getBoxE().getSaisie2().getQt().getText().trim());
+
+                Plat s2 = new Plat(2, "Entrée", nomEntree2, qtEntree2);
                 starters.add(s2);
-                Plat s3 = new Plat(starters.size() + 1, "Entrée", centre.getBoxE().getSaisie3().getEntree().getText(), Integer.parseInt(centre.getBoxE().getSaisie3().getQt().getText().trim()));
+
+                String nomEntree3 = centre.getBoxE().getSaisie3().getEntree().getText();
+                int qtEntree3 = Integer.parseInt(centre.getBoxE().getSaisie3().getQt().getText().trim());
+
+                Plat s3 = new Plat(3, "Entrée", nomEntree3, qtEntree3);
                 starters.add(s3);
-                Plat s4 = new Plat(starters.size() + 1, "Entrée", centre.getBoxE().getSaisie4().getEntree().getText(), Integer.parseInt(centre.getBoxE().getSaisie4().getQt().getText().trim()));
+
+                String nomEntree4 = centre.getBoxE().getSaisie4().getEntree().getText();
+                int qtEntree4 = Integer.parseInt(centre.getBoxE().getSaisie4().getQt().getText().trim());
+
+                Plat s4 = new Plat(4, "Entrée", nomEntree4, qtEntree4);
                 starters.add(s4);
 
-                Plat mc1 = new Plat(main_courses.size() + 1, "Plat", centre.getBoxP().getSaisie1().getPlats().getText(), Integer.parseInt(centre.getBoxP().getSaisie1().getQt().getText().trim()));
+                //PLATS 
+                String nomPlat1 = centre.getBoxP().getSaisie1().getPlats().getText();
+                int qtPlat1 = Integer.parseInt(centre.getBoxP().getSaisie1().getQt().getText().trim());
+
+                Plat mc1 = new Plat(1, "Plat", nomPlat1, qtPlat1);
                 main_courses.add(mc1);
-                Plat mc2 = new Plat(main_courses.size() + 1, "Plat", centre.getBoxP().getSaisie2().getPlats().getText(), Integer.parseInt(centre.getBoxP().getSaisie2().getQt().getText().trim()));
+
+                String nomPlat2 = centre.getBoxP().getSaisie2().getPlats().getText();
+                int qtPlat2 = Integer.parseInt(centre.getBoxP().getSaisie2().getQt().getText().trim());
+
+                Plat mc2 = new Plat(2, "Plat", nomPlat2, qtPlat2);
                 main_courses.add(mc2);
-                Plat mc3 = new Plat(main_courses.size() + 1, "Plat", centre.getBoxP().getSaisie3().getPoisson().getText(), Integer.parseInt(centre.getBoxP().getSaisie3().getQt().getText().trim()));
+
+                String nomPlat3 = centre.getBoxP().getSaisie3().getPoisson().getText();
+                int qtPlat3 = Integer.parseInt(centre.getBoxP().getSaisie3().getQt().getText().trim());
+
+                Plat mc3 = new Plat(3, "Plat", nomPlat3, qtPlat3);
                 main_courses.add(mc3);
 
-                Plat d1 = new Plat(desserts.size() + 1, "Dessert", centre.getBoxD().getSaisie1().getDesserts().getText(), Integer.parseInt(centre.getBoxD().getSaisie1().getQt().getText().trim()));
+                //DESSERTS
+                String nomDessert1 = centre.getBoxD().getSaisie1().getDesserts().getText();
+                int qtDessert1 = Integer.parseInt(centre.getBoxD().getSaisie1().getQt().getText().trim());
+
+                Plat d1 = new Plat(1, "Dessert", nomDessert1, qtDessert1);
                 desserts.add(d1);
-                Plat d2 = new Plat(desserts.size() + 1, "Dessert", centre.getBoxD().getSaisie2().getDesserts().getText(), Integer.parseInt(centre.getBoxD().getSaisie2().getQt().getText().trim()));
+
+                String nomDessert2 = centre.getBoxD().getSaisie2().getDesserts().getText();
+                int qtDessert2 = Integer.parseInt(centre.getBoxD().getSaisie2().getQt().getText().trim());
+
+                Plat d2 = new Plat(2, "Dessert", nomDessert2, qtDessert2);
                 desserts.add(d2);
-                Plat d3 = new Plat(desserts.size() + 1, "Dessert", centre.getBoxD().getSaisie3().getDesserts().getText(), Integer.parseInt(centre.getBoxD().getSaisie3().getQt().getText().trim()));
+
+                String nomDessert3 = centre.getBoxD().getSaisie3().getDesserts().getText();
+                int qtDessert3 = Integer.parseInt(centre.getBoxD().getSaisie3().getQt().getText().trim());
+
+                Plat d3 = new Plat(3, "Dessert", nomDessert3, qtDessert3);
                 desserts.add(d3);
-                Plat d4 = new Plat(desserts.size() + 1, "Dessert", centre.getBoxD().getSaisie4().getDesserts().getText(), Integer.parseInt(centre.getBoxD().getSaisie4().getQt().getText().trim()));
+
+                String nomDessert4 = centre.getBoxD().getSaisie4().getDesserts().getText();
+                int qtDessert4 = Integer.parseInt(centre.getBoxD().getSaisie4().getQt().getText().trim());
+
+                Plat d4 = new Plat(4, "Dessert", nomDessert4, qtDessert4);
                 desserts.add(d4);
-                
-                
+
                 try (PrintWriter out = new PrintWriter(new FileWriter("menu.json"))) {
-                //FileWriter fichier = new FileWriter ("menu.json");
-                
-                JSONObject json = new JSONObject();
-                 
-                JSONArray st = new JSONArray();
-                st.add(s1.toJson());
-                st.add(s2.toJson());
-                st.add(s3.toJson());
-                st.add(s4.toJson());
-                
-                json.put("starters", st);
-                
-                JSONArray mc = new JSONArray();
-                mc.add(mc1.toJson());
-                mc.add(mc2.toJson());
-                mc.add(mc3.toJson());
-                
-                json.put("main_courses", mc);
-                
-                JSONArray d = new JSONArray();
-                d.add(d1.toJson());
-                d.add(d2.toJson());
-                d.add(d3.toJson());
-                d.add(d4.toJson());
-                
-                json.put("desserts", d);
-                
-                json.writeJSONString(out);
-                // System.out.printf(JSON.toString());
-                out.close();
-                
+                    //FileWriter fichier = new FileWriter ("menu.json");
+                    // utilisation de PrintWriter car FileWriter uniquement ne fonctionne pas sur mac
+
+                    JSONObject json = new JSONObject();
+
+                    JSONArray st = new JSONArray();
+                    st.add(s1.toJson());
+                    st.add(s2.toJson());
+                    st.add(s3.toJson());
+                    st.add(s4.toJson());
+
+                    json.put("starters", st);
+
+                    JSONArray mc = new JSONArray();
+                    mc.add(mc1.toJson());
+                    mc.add(mc2.toJson());
+                    mc.add(mc3.toJson());
+
+                    json.put("main_courses", mc);
+
+                    JSONArray d = new JSONArray();
+                    d.add(d1.toJson());
+                    d.add(d2.toJson());
+                    d.add(d3.toJson());
+                    d.add(d4.toJson());
+
+                    json.put("desserts", d);
+
+                    json.writeJSONString(out);
+                    // System.out.printf(JSON.toString());
+                    out.close();
+
                 } catch (Exception w) {
-                w.printStackTrace();
-            }
+                    w.printStackTrace();
+                }
+                lireJson.LireJson();
+
+                while (qtEntree1 >= 0) {
+                    if (lireJson.jsonO.getId()=1){
+                    
+
+                    //tant que order de qt1 de la cuisine >=0
+                    // si get qt1 de la salle > 0
+                    // qt 1 - get qt1
+                    // else, return "ce plat n'est plus disponible 
+                    return;
+                }
+                }
             } catch (QuantityException ex) {
                 Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
             }
+
         });
-        
-        lireJson.LireJson();
-        
+
     }
 }
