@@ -19,22 +19,34 @@ import org.json.simple.parser.ParseException;
  */
 public class LireJson {
     
-    JSONObject OrderPart orderpart;
     
     public static void LireJson() {    
     JSONParser jsonP = new JSONParser();
     
     try {
     JSONObject jsonO = (JSONObject)jsonP.parse(new FileReader("restaurant_exemple_commande.json"));
+        
+        String id = (String)jsonO.get("id");
+        System.out.println(id);
     
-         JSONArray starters = JSONArray.get("starters");
-            for (JSONObject obj: starters){
-                OderPart entree = new OderPart (obj);
-                System.out.println(OderPart);
+         JSONArray starters = (JSONArray) jsonO.get("starters");
+            for (Object obj: starters){
+                OrderPart entree = new OrderPart ((JSONObject) obj);
+                System.out.println(entree);
+             }   
+        
+         JSONArray main_courses = (JSONArray) jsonO.get("main_courses");
+            for (Object obj: main_courses){
+                OrderPart plats = new OrderPart ((JSONObject) obj);
+                System.out.println(plats);
+            }
+            
+        JSONArray desserts = (JSONArray) jsonO.get("desserts");
+            for (Object obj: desserts){
+                OrderPart dessert = new OrderPart ((JSONObject) obj);
+                System.out.println(dessert);
             }
          
-         System.out.println("id :"+ id);
-         System.out.println("qty: "+ qty);
          
       } catch (FileNotFoundException e) {
          e.printStackTrace();

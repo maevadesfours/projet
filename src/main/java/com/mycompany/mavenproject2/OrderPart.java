@@ -11,33 +11,33 @@ import org.json.simple.JSONObject;
  * @author maevadesfours
  */
 public class OrderPart {
-    int id;
-    int qty;
+    Long id;
+    Long qty;
     
     public OrderPart(JSONObject obj){
-        this.id = (int)obj.get("id");
-        this.qty = (int)obj.get("qty");
+        this.id = (Long)obj.get("id");
+        this.qty = (Long)obj.get("qty");
                
 }
 
     @Override
     public String toString() {
-        return "OrderPart{" + "id=" + id + ", qty=" + qty + '}';
+        return "{id=" + id + ", qty=" + qty + '}';
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public int getQty() {
+    public Long getQty() {
         return qty;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public void setQty(int qty) {
+    public void setQty(Long qty) {
         this.qty = qty;
     }
     

@@ -11,7 +11,10 @@ package com.mycompany.mavenproject2;
 class Mavenproject2 {
 
     public static void main(String[] args) {
+       LireJson lire = new LireJson();
+
        Fenetre f = new Fenetre(); 
+       
     }
 }
     
