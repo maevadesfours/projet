@@ -25,37 +25,43 @@ public class Sud extends JPanel {
     
     private JButton annulé;
     private JButton validé;
+    private JButton commande;
     
     public Sud(){
-       
-        JButton valider = new JButton ("Valider le menu");
-        valider.setLayout(new FlowLayout());
-         
-        valider.setBackground(Color.GREEN);
-        valider.setOpaque(true);
-        valider.setBorder(BorderFactory.createEmptyBorder(10, 70, 10, 70));
-        Font police = new Font("Courier New", Font.BOLD, 20);
-        valider.setForeground(Color.BLACK);
-            valider.setFont(police);
-        
-        this.add(valider);
-        this.validé = valider;
-        
    
-        JButton annuler = new JButton ("Annuler");
-        annuler.setLayout(new FlowLayout());
-        
-        annuler.setBackground(Color.RED);
-        annuler.setOpaque(true);
-        annuler.setBorder(BorderFactory.createEmptyBorder(10, 70, 10, 70));
+        this.annulé = new JButton ("    Annuler    ");
+
+        annulé.setBackground(Color.RED);
+        annulé.setOpaque(true);
+        annulé.setBorder(BorderFactory.createEmptyBorder(10, 70, 10, 70));
         Font police1 = new Font("Courier New", Font.BOLD, 20);
-        annuler.setForeground(Color.BLACK);
-            annuler.setFont(police1);
-        annuler.setLayout(new FlowLayout());
-        this.add(annuler);
-        this.annulé = annuler;
+        annulé.setForeground(Color.BLACK);
+            annulé.setFont(police1);
+        annulé.setLayout(new FlowLayout());
+        this.add(annulé);
         
         
+        this.validé = new JButton ("Valider le menu");
+        
+        validé.setBackground(Color.GREEN);
+        validé.setOpaque(true);
+        validé.setBorder(BorderFactory.createEmptyBorder(10, 70, 10, 70));
+        Font police = new Font("Courier New", Font.BOLD, 20);
+        validé.setForeground(Color.BLACK);
+            validé.setFont(police);
+        
+        this.add(validé);
+        
+        
+        this.commande = new JButton("Gestion commandes");
+        
+        commande.setBackground(Color.yellow);
+        commande.setOpaque(true);
+        commande.setBorder(BorderFactory.createEmptyBorder(10, 70, 10, 70));
+        Font police2= new Font("Courier New", Font.BOLD, 20);
+        commande.setForeground(Color.BLACK);
+            commande.setFont(police2);
+        this.add(commande);
      } 
 
     public JButton getAnnulé() {
@@ -64,6 +70,10 @@ public class Sud extends JPanel {
 
     public JButton getValidé() {
         return validé;
+    }
+
+    public JButton getCde() {
+        return commande;
     }
     
 }

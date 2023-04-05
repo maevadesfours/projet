@@ -35,7 +35,7 @@ public class Fenetre extends JFrame {
     private final ArrayList<Plat> starters = new ArrayList<>();
     private final ArrayList<Plat> main_courses = new ArrayList<>();
     private final ArrayList<Plat> desserts = new ArrayList<>();
-    private LireJson lireJson;
+    private Commande lireJson;
 
     public Fenetre() {
         super("el ristorante");
@@ -46,7 +46,6 @@ public class Fenetre extends JFrame {
         nord = new Nord();
         sud = new Sud();
         centre = new Centre();
-
         this.setLayout(new BorderLayout(10, 10));
         getContentPane().add(nord, BorderLayout.NORTH);
         getContentPane().add(sud, BorderLayout.SOUTH);
@@ -87,6 +86,10 @@ public class Fenetre extends JFrame {
             centre.getBoxD().getSaisie3().getQt().setText("Qt ");
             centre.getBoxD().getSaisie4().getQt().setText("Qt ");
 
+        });
+        
+        sud.getCde().addActionListener((e) -> {
+            gestionCommandes();
         });
 
         sud.getValidé().addActionListener(e -> {
@@ -167,19 +170,22 @@ public class Fenetre extends JFrame {
                 Plat d4 = new Plat(4, "Dessert", nomDessert4, qtDessert4);
                 desserts.add(d4);
 
+                
+                // si saississez ... --> qt =0 de l'id associé
+                
                 try (PrintWriter out = new PrintWriter(new FileWriter("menu.json"))) {
                     //FileWriter fichier = new FileWriter ("menu.json");
                     // utilisation de PrintWriter car FileWriter uniquement ne fonctionne pas sur mac
 
                     JSONObject json = new JSONObject();
 
-                    JSONArray st = new JSONArray();
-                    st.add(s1.toJson());
-                    st.add(s2.toJson());
-                    st.add(s3.toJson());
-                    st.add(s4.toJson());
+                    JSONArray s = new JSONArray();
+                    s.add(s1.toJson());
+                    s.add(s2.toJson());
+                    s.add(s3.toJson());
+                    s.add(s4.toJson());
 
-                    json.put("starters", st);
+                    json.put("starters", s);
 
                     JSONArray mc = new JSONArray();
                     mc.add(mc1.toJson());
@@ -203,24 +209,61 @@ public class Fenetre extends JFrame {
                 } catch (Exception w) {
                     w.printStackTrace();
                 }
-                lireJson.LireJson();
 
-                while (qtEntree1 >= 0) {
-                    if (lireJson.jsonO.getId()=1){
-                    
-
-                    //tant que order de qt1 de la cuisine >=0
-                    // si get qt1 de la salle > 0
-                    // qt 1 - get qt1
-                    // else, return "ce plat n'est plus disponible 
-                    return;
-                }
-                }
-            } catch (QuantityException ex) {
-                Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (NumberFormatException n) {
+                JOptionPane.showMessageDialog(this, "les quantités doivent être des entiers");
+            } catch (QuantityException x) {
+                System.out.println(x);
             }
-
         });
+    }
+
+    public void gestionCommandes() {
+        System.out.println("Dans la gestion des commandes");
+        Commande commande = new Commande("restaurant_exemple_commande.json");
+
+        ArrayList<OrderPart> listeEntree = commande.getEntrees();
+
+        for (OrderPart entree : listeEntree) {
+            Integer qt = entree.getQty().intValue();
+            for (Plat s : starters) {
+                if (entree.getId() == s.getId() && (qt <= s.getQtPlat()) && (qt > 0)) {
+                    s.setQtPlat(s.getQtPlat() - qt);
+                    System.out.printf("Commande : %d %n   nom plat : %s %n   qté commandée : %d %n   qté restante : %d %n",
+                            commande.getId(), s.getNomPlat(), qt, s.getQtPlat());
+                } else if (entree.getId() == s.getId() && qt > 0) {
+                    System.out.println("Entree : " + s.getNomPlat() + " --> NON DISPONIBLE");
+                }
+            }
+        }
+        ArrayList<OrderPart> listePlat = commande.getPlats();
+
+        for (OrderPart plat : listePlat) {
+            Integer qt2 = plat.getQty().intValue();
+            for (Plat mc : main_courses) {
+                if (plat.getId() == mc.getId() && (qt2 <= mc.getQtPlat()) && (qt2 > 0)) {
+                    mc.setQtPlat(mc.getQtPlat() - qt2);
+                    System.out.printf("Commande : %d %n   nom plat : %s %n   qté commandée : %d %n   qté restante : %d %n",
+                            commande.getId(), mc.getNomPlat(), qt2, mc.getQtPlat());
+                } else if (plat.getId() == mc.getId() && qt2 > 0) {
+                    System.out.println("PLat : " + mc.getNomPlat() + " --> NON DISPONIBLE ");
+                }
+            }
+        }
+        ArrayList<OrderPart> listeDessert = commande.getDesserts();
+
+        for (OrderPart dessert : listeDessert) {
+            Integer qt3 = dessert.getQty().intValue();
+            for (Plat d : desserts) {
+                if (dessert.getId() == d.getId() && (qt3 <= d.getQtPlat()) && (qt3 > 0)) {
+                    d.setQtPlat(d.getQtPlat() - qt3);
+                    System.out.printf("Commande : %d %n   nom plat : %s %n   qté commandée : %d %n   qté restante : %d %n",
+                            commande.getId(), d.getNomPlat(), qt3, d.getQtPlat());
+                } else if (dessert.getId() == d.getId() && qt3 > 0) {
+                    System.out.println("Dessert : " + d.getNomPlat() + " --> NON DISPONIBLE");
+                }
+            }
+        }
 
     }
 }
