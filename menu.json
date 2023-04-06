@@ -1,1 +1,49 @@
-{"desserts":[{"qty":2,"description":"CHOCO","id":1},{"qty":3,"description":"CREME B ","id":2},{"qty":2,"description":"GLACE ","id":3},{"qty":4,"description":"CHURROS","id":4}],"starters":[{"qty":3,"description":"QUICHE ","id":1},{"qty":2,"description":"SALADE ","id":2},{"qty":1,"description":"PIZZA ","id":3},{"qty":2,"description":"SAUCISSE","id":4}],"main_courses":[{"qty":2,"description":"ALIGOT","id":1},{"qty":3,"description":"LASAGNE ","id":2},{"qty":1,"description":"SAUMON","id":3}]}
+{
+    "desserts": [{
+            "qty": 0,
+            "description": " Saisissez un dessert  ",
+            "id": 1
+        }, {
+            "qty": 0,
+            "description": " Saisissez un dessert  ",
+            "id": 2
+        }, {
+            "qty": 0,
+            "description": " Saisissez un dessert  ",
+            "id": 3
+        }, {
+            "qty": 0,
+            "description": " Saisissez un dessert  ",
+            "id": 4
+        }],
+    "starters": [{
+            "qty": 0,
+            "description": "Saisissez une entrée ",
+            "id": 1
+        }, {
+            "qty": 0,
+            "description": "Saisissez une entrée ",
+            "id": 2
+        }, {
+            "qty": 0,
+            "description": "Saisissez une entrée ",
+            "id": 3
+        }, {
+            "qty": 0,
+            "description": "Saisissez une entrée ",
+            "id": 4
+        }],
+    "main_courses": [{
+            "qty": 0,
+            "description": "    Saisissez un plat     ",
+            "id": 1
+        }, {
+            "qty": 0,
+            "description": "    Saisissez un plat     ",
+            "id": 2
+        }, {
+            "qty": 0,
+            "description": "   Poisson du jour    ",
+            "id": 3
+        }]
+}

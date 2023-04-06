@@ -36,6 +36,9 @@ public class Fenetre extends JFrame {
     private final ArrayList<Plat> main_courses = new ArrayList<>();
     private final ArrayList<Plat> desserts = new ArrayList<>();
     private Commande lireJson;
+    
+    private String nomPlat3;
+    private String nomEntree1;
 
     public Fenetre() {
         super("el ristorante");
@@ -102,7 +105,11 @@ public class Fenetre extends JFrame {
                 //permet de retrouver le nom de l'entrée saisie par l'utilisateur 
                 int qtEntree1 = Integer.parseInt(centre.getBoxE().getSaisie1().getQt().getText().trim());
                 //permet de retrouver la quantité d'entrée saisie par l'utilisateur 
-
+                
+                //tester que l'utilisateur a bien saisi un plat, sinon il annule ce champs de saisie en mettant la qt=0
+                if (nomEntree1.equalsIgnoreCase("Saisissez une entrée ")){
+                    qtEntree1=0;
+                }
                 Plat s1 = new Plat(1, "Entrée", nomEntree1, qtEntree1);
                 starters.add(s1);
                 //code utilisé pour tester le bon fonctionnmenet des guetters
@@ -110,69 +117,97 @@ public class Fenetre extends JFrame {
 
                 String nomEntree2 = centre.getBoxE().getSaisie2().getEntree().getText();
                 int qtEntree2 = Integer.parseInt(centre.getBoxE().getSaisie2().getQt().getText().trim());
-
+                
+                if (nomEntree2.equalsIgnoreCase("Saisissez une entrée ")){
+                    qtEntree2=0;
+                }
                 Plat s2 = new Plat(2, "Entrée", nomEntree2, qtEntree2);
                 starters.add(s2);
 
                 String nomEntree3 = centre.getBoxE().getSaisie3().getEntree().getText();
                 int qtEntree3 = Integer.parseInt(centre.getBoxE().getSaisie3().getQt().getText().trim());
-
+                
+                if (nomEntree3.equalsIgnoreCase("Saisissez une entrée ")){
+                    qtEntree3=0;
+                }    
                 Plat s3 = new Plat(3, "Entrée", nomEntree3, qtEntree3);
                 starters.add(s3);
 
                 String nomEntree4 = centre.getBoxE().getSaisie4().getEntree().getText();
                 int qtEntree4 = Integer.parseInt(centre.getBoxE().getSaisie4().getQt().getText().trim());
-
+                
+                if (nomEntree4.equalsIgnoreCase("Saisissez une entrée ")){
+                    qtEntree4=0;
+                } 
                 Plat s4 = new Plat(4, "Entrée", nomEntree4, qtEntree4);
                 starters.add(s4);
 
                 //PLATS 
                 String nomPlat1 = centre.getBoxP().getSaisie1().getPlats().getText();
                 int qtPlat1 = Integer.parseInt(centre.getBoxP().getSaisie1().getQt().getText().trim());
-
+                
+                if (nomPlat1.equalsIgnoreCase("    Saisissez un plat     ")){
+                    qtPlat1=0;
+                }     
                 Plat mc1 = new Plat(1, "Plat", nomPlat1, qtPlat1);
                 main_courses.add(mc1);
 
                 String nomPlat2 = centre.getBoxP().getSaisie2().getPlats().getText();
                 int qtPlat2 = Integer.parseInt(centre.getBoxP().getSaisie2().getQt().getText().trim());
-
+                
+                if (nomPlat2.equalsIgnoreCase("    Saisissez un plat     ")){
+                    qtPlat2=0;
+                }
+                
                 Plat mc2 = new Plat(2, "Plat", nomPlat2, qtPlat2);
                 main_courses.add(mc2);
-
+                
                 String nomPlat3 = centre.getBoxP().getSaisie3().getPoisson().getText();
                 int qtPlat3 = Integer.parseInt(centre.getBoxP().getSaisie3().getQt().getText().trim());
-
+                
+                if (nomPlat3.equalsIgnoreCase("   Poisson du jour    ")){
+                    qtPlat3=0;
+                }
                 Plat mc3 = new Plat(3, "Plat", nomPlat3, qtPlat3);
                 main_courses.add(mc3);
 
                 //DESSERTS
                 String nomDessert1 = centre.getBoxD().getSaisie1().getDesserts().getText();
                 int qtDessert1 = Integer.parseInt(centre.getBoxD().getSaisie1().getQt().getText().trim());
-
+                
+                if (nomDessert1.equalsIgnoreCase(" Saisissez un dessert  ")){
+                    qtDessert1=0;
+                }
                 Plat d1 = new Plat(1, "Dessert", nomDessert1, qtDessert1);
                 desserts.add(d1);
 
                 String nomDessert2 = centre.getBoxD().getSaisie2().getDesserts().getText();
                 int qtDessert2 = Integer.parseInt(centre.getBoxD().getSaisie2().getQt().getText().trim());
 
+                if (nomDessert2.equalsIgnoreCase(" Saisissez un dessert  ")){
+                    qtDessert2=0;
+                }
                 Plat d2 = new Plat(2, "Dessert", nomDessert2, qtDessert2);
                 desserts.add(d2);
 
                 String nomDessert3 = centre.getBoxD().getSaisie3().getDesserts().getText();
                 int qtDessert3 = Integer.parseInt(centre.getBoxD().getSaisie3().getQt().getText().trim());
-
+                
+                if (nomDessert3.equalsIgnoreCase(" Saisissez un dessert  ")){
+                    qtDessert3=0;
+                }
                 Plat d3 = new Plat(3, "Dessert", nomDessert3, qtDessert3);
                 desserts.add(d3);
 
                 String nomDessert4 = centre.getBoxD().getSaisie4().getDesserts().getText();
                 int qtDessert4 = Integer.parseInt(centre.getBoxD().getSaisie4().getQt().getText().trim());
-
+                
+                if (nomDessert4.equalsIgnoreCase(" Saisissez un dessert  ")){
+                    qtDessert4=0;
+                }
                 Plat d4 = new Plat(4, "Dessert", nomDessert4, qtDessert4);
                 desserts.add(d4);
 
-                
-                // si saississez ... --> qt =0 de l'id associé
-                
                 try (PrintWriter out = new PrintWriter(new FileWriter("menu.json"))) {
                     //FileWriter fichier = new FileWriter ("menu.json");
                     // utilisation de PrintWriter car FileWriter uniquement ne fonctionne pas sur mac
