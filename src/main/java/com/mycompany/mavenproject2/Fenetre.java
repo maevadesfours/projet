@@ -262,10 +262,10 @@ public class Fenetre extends JFrame {
 
     public void gestionCommandes() {
         System.out.println("Dans la gestion des commandes");
-        File rep = new File("");
+        File rep = new File(System.getProperty("user.dir"));
         String[] commandes = rep.list((dir, name) -> name.matches("order_[0-9]+.json"));
-        for (String com : commandes) {
-
+        
+            for (String com : commandes) {
             Commande commande = new Commande(com);
 
             ArrayList<OrderPart> listeEntree = commande.getEntrees();
