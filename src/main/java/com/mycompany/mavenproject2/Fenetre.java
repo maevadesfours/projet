@@ -8,22 +8,17 @@ package com.mycompany.mavenproject2;
  *
  * @author maevadesfours
  */
-import static com.sun.management.HotSpotDiagnosticMXBean.ThreadDumpFormat.JSON;
 import java.awt.BorderLayout;
+import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.io.PrintWriter;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 
 public class Fenetre extends JFrame {
 
@@ -36,9 +31,6 @@ public class Fenetre extends JFrame {
     private final ArrayList<Plat> main_courses = new ArrayList<>();
     private final ArrayList<Plat> desserts = new ArrayList<>();
     private Commande lireJson;
-    
-    private String nomPlat3;
-    private String nomEntree1;
 
     public Fenetre() {
         super("el ristorante");
@@ -55,11 +47,13 @@ public class Fenetre extends JFrame {
         getContentPane().add(centre, BorderLayout.CENTER);
 
         this.setTitle("El Ristorante");
-        this.setSize(1000, 1000);
+        this.setSize(1000, 700);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
 
+        //programmmation du bouton annulé 
+        // il remet chaque champs de saisie TextField à sa valeur initiale 
         sud.getAnnulé().addActionListener(l -> {
             centre.getBoxE().getSaisie1().getEntree().setText("Saisissez une entrée ");
             centre.getBoxE().getSaisie2().getEntree().setText("Saisissez une entrée ");
@@ -90,11 +84,13 @@ public class Fenetre extends JFrame {
             centre.getBoxD().getSaisie4().getQt().setText("Qt ");
 
         });
-        
+        //programmation du bouton gestion des commandes par la fonction gestionCommandes() définie plus bas
+        //lors de l'activation de ce bouton il va déclacher la fonction gestionCommandes()
         sud.getCde().addActionListener((e) -> {
             gestionCommandes();
         });
 
+        // prgrammation du bouton validé, dans une boucle try/catch
         sud.getValidé().addActionListener(e -> {
 
             try {
@@ -105,68 +101,72 @@ public class Fenetre extends JFrame {
                 //permet de retrouver le nom de l'entrée saisie par l'utilisateur 
                 int qtEntree1 = Integer.parseInt(centre.getBoxE().getSaisie1().getQt().getText().trim());
                 //permet de retrouver la quantité d'entrée saisie par l'utilisateur 
-                
+
                 //tester que l'utilisateur a bien saisi un plat, sinon il annule ce champs de saisie en mettant la qt=0
-                if (nomEntree1.equalsIgnoreCase("Saisissez une entrée ")){
-                    qtEntree1=0;
+                if (nomEntree1.equalsIgnoreCase("Saisissez une entrée ")) {
+                    qtEntree1 = 0;
                 }
+                //création d'un nouveau plat avec les variables récupérées précédement dans les champs de saisies de l'interface 
                 Plat s1 = new Plat(1, "Entrée", nomEntree1, qtEntree1);
+                // ajout du plat à l'arraylist contenant les entrées
                 starters.add(s1);
                 //code utilisé pour tester le bon fonctionnmenet des guetters
                 //System.out.println(s1.toJson());
 
+                //utilisation de la même méthode pour tous les plats suivants
                 String nomEntree2 = centre.getBoxE().getSaisie2().getEntree().getText();
                 int qtEntree2 = Integer.parseInt(centre.getBoxE().getSaisie2().getQt().getText().trim());
-                
-                if (nomEntree2.equalsIgnoreCase("Saisissez une entrée ")){
-                    qtEntree2=0;
+
+                if (nomEntree2.equalsIgnoreCase("Saisissez une entrée ")) {
+                    qtEntree2 = 0;
                 }
                 Plat s2 = new Plat(2, "Entrée", nomEntree2, qtEntree2);
                 starters.add(s2);
 
                 String nomEntree3 = centre.getBoxE().getSaisie3().getEntree().getText();
                 int qtEntree3 = Integer.parseInt(centre.getBoxE().getSaisie3().getQt().getText().trim());
-                
-                if (nomEntree3.equalsIgnoreCase("Saisissez une entrée ")){
-                    qtEntree3=0;
-                }    
+
+                if (nomEntree3.equalsIgnoreCase("Saisissez une entrée ")) {
+                    qtEntree3 = 0;
+                }
                 Plat s3 = new Plat(3, "Entrée", nomEntree3, qtEntree3);
                 starters.add(s3);
 
                 String nomEntree4 = centre.getBoxE().getSaisie4().getEntree().getText();
                 int qtEntree4 = Integer.parseInt(centre.getBoxE().getSaisie4().getQt().getText().trim());
-                
-                if (nomEntree4.equalsIgnoreCase("Saisissez une entrée ")){
-                    qtEntree4=0;
-                } 
+
+                if (nomEntree4.equalsIgnoreCase("Saisissez une entrée ")) {
+                    qtEntree4 = 0;
+                }
                 Plat s4 = new Plat(4, "Entrée", nomEntree4, qtEntree4);
                 starters.add(s4);
 
                 //PLATS 
                 String nomPlat1 = centre.getBoxP().getSaisie1().getPlats().getText();
                 int qtPlat1 = Integer.parseInt(centre.getBoxP().getSaisie1().getQt().getText().trim());
-                
-                if (nomPlat1.equalsIgnoreCase("    Saisissez un plat     ")){
-                    qtPlat1=0;
-                }     
+
+                if (nomPlat1.equalsIgnoreCase("    Saisissez un plat     ")) {
+                    qtPlat1 = 0;
+                }
                 Plat mc1 = new Plat(1, "Plat", nomPlat1, qtPlat1);
+                //ajout à l'arraylist des plats 
                 main_courses.add(mc1);
 
                 String nomPlat2 = centre.getBoxP().getSaisie2().getPlats().getText();
                 int qtPlat2 = Integer.parseInt(centre.getBoxP().getSaisie2().getQt().getText().trim());
-                
-                if (nomPlat2.equalsIgnoreCase("    Saisissez un plat     ")){
-                    qtPlat2=0;
+
+                if (nomPlat2.equalsIgnoreCase("    Saisissez un plat     ")) {
+                    qtPlat2 = 0;
                 }
-                
+
                 Plat mc2 = new Plat(2, "Plat", nomPlat2, qtPlat2);
                 main_courses.add(mc2);
-                
+
                 String nomPlat3 = centre.getBoxP().getSaisie3().getPoisson().getText();
                 int qtPlat3 = Integer.parseInt(centre.getBoxP().getSaisie3().getQt().getText().trim());
-                
-                if (nomPlat3.equalsIgnoreCase("   Poisson du jour    ")){
-                    qtPlat3=0;
+
+                if (nomPlat3.equalsIgnoreCase("   Poisson du jour    ")) {
+                    qtPlat3 = 0;
                 }
                 Plat mc3 = new Plat(3, "Plat", nomPlat3, qtPlat3);
                 main_courses.add(mc3);
@@ -174,54 +174,60 @@ public class Fenetre extends JFrame {
                 //DESSERTS
                 String nomDessert1 = centre.getBoxD().getSaisie1().getDesserts().getText();
                 int qtDessert1 = Integer.parseInt(centre.getBoxD().getSaisie1().getQt().getText().trim());
-                
-                if (nomDessert1.equalsIgnoreCase(" Saisissez un dessert  ")){
-                    qtDessert1=0;
+
+                if (nomDessert1.equalsIgnoreCase(" Saisissez un dessert  ")) {
+                    qtDessert1 = 0;
                 }
                 Plat d1 = new Plat(1, "Dessert", nomDessert1, qtDessert1);
+                // ajout du plat à l'arraylist des desserts 
                 desserts.add(d1);
 
                 String nomDessert2 = centre.getBoxD().getSaisie2().getDesserts().getText();
                 int qtDessert2 = Integer.parseInt(centre.getBoxD().getSaisie2().getQt().getText().trim());
 
-                if (nomDessert2.equalsIgnoreCase(" Saisissez un dessert  ")){
-                    qtDessert2=0;
+                if (nomDessert2.equalsIgnoreCase(" Saisissez un dessert  ")) {
+                    qtDessert2 = 0;
                 }
                 Plat d2 = new Plat(2, "Dessert", nomDessert2, qtDessert2);
                 desserts.add(d2);
 
                 String nomDessert3 = centre.getBoxD().getSaisie3().getDesserts().getText();
                 int qtDessert3 = Integer.parseInt(centre.getBoxD().getSaisie3().getQt().getText().trim());
-                
-                if (nomDessert3.equalsIgnoreCase(" Saisissez un dessert  ")){
-                    qtDessert3=0;
+
+                if (nomDessert3.equalsIgnoreCase(" Saisissez un dessert  ")) {
+                    qtDessert3 = 0;
                 }
                 Plat d3 = new Plat(3, "Dessert", nomDessert3, qtDessert3);
                 desserts.add(d3);
 
                 String nomDessert4 = centre.getBoxD().getSaisie4().getDesserts().getText();
                 int qtDessert4 = Integer.parseInt(centre.getBoxD().getSaisie4().getQt().getText().trim());
-                
-                if (nomDessert4.equalsIgnoreCase(" Saisissez un dessert  ")){
-                    qtDessert4=0;
+
+                if (nomDessert4.equalsIgnoreCase(" Saisissez un dessert  ")) {
+                    qtDessert4 = 0;
                 }
                 Plat d4 = new Plat(4, "Dessert", nomDessert4, qtDessert4);
                 desserts.add(d4);
 
                 try (PrintWriter out = new PrintWriter(new FileWriter("menu.json"))) {
-                    //FileWriter fichier = new FileWriter ("menu.json");
                     // utilisation de PrintWriter car FileWriter uniquement ne fonctionne pas sur mac
 
+                    //création d'un JSONObject
                     JSONObject json = new JSONObject();
 
+                    //création d'une arraylist en JSON à laquelle on va ajouter chaqu'une des entrées
                     JSONArray s = new JSONArray();
                     s.add(s1.toJson());
                     s.add(s2.toJson());
                     s.add(s3.toJson());
                     s.add(s4.toJson());
+                    // .toJson fait référence à la méthode toJson de la classe Plat
+                    // elle permet d'écrire un plat sous forme d'object
 
                     json.put("starters", s);
+                    //ajout de l'arraylist "s" écrite en Json à l'élément starters de l'object json
 
+                    // même méthode que précédement
                     JSONArray mc = new JSONArray();
                     mc.add(mc1.toJson());
                     mc.add(mc2.toJson());
@@ -237,68 +243,73 @@ public class Fenetre extends JFrame {
 
                     json.put("desserts", d);
 
+                    //écriture du fichier
                     json.writeJSONString(out);
-                    // System.out.printf(JSON.toString());
                     out.close();
 
                 } catch (Exception w) {
                     w.printStackTrace();
                 }
-
-            } catch (NumberFormatException n) {
-                JOptionPane.showMessageDialog(this, "les quantités doivent être des entiers");
             } catch (QuantityException x) {
                 System.out.println(x);
+                //exception pour vérifier que toutes les quantitées saisies soient bien des entiers
+            } catch (NumberFormatException n) {
+                JOptionPane.showMessageDialog(this, "les quantités doivent être des entiers");
+                //fenêtre d'affiche du message d'erreur sur la console
             }
         });
     }
 
     public void gestionCommandes() {
         System.out.println("Dans la gestion des commandes");
-        Commande commande = new Commande("restaurant_exemple_commande.json");
+        File rep = new File("");
+        String[] commandes = rep.list((dir, name) -> name.matches("order_[0-9]+.json"));
+        for (String com : commandes) {
 
-        ArrayList<OrderPart> listeEntree = commande.getEntrees();
+            Commande commande = new Commande(com);
 
-        for (OrderPart entree : listeEntree) {
-            Integer qt = entree.getQty().intValue();
-            for (Plat s : starters) {
-                if (entree.getId() == s.getId() && (qt <= s.getQtPlat()) && (qt > 0)) {
-                    s.setQtPlat(s.getQtPlat() - qt);
-                    System.out.printf("Commande : %d %n   nom plat : %s %n   qté commandée : %d %n   qté restante : %d %n",
-                            commande.getId(), s.getNomPlat(), qt, s.getQtPlat());
-                } else if (entree.getId() == s.getId() && qt > 0) {
-                    System.out.println("Entree : " + s.getNomPlat() + " --> NON DISPONIBLE");
+            ArrayList<OrderPart> listeEntree = commande.getEntrees();
+
+            for (OrderPart entree : listeEntree) {
+                Integer qt = entree.getQty().intValue();
+                for (Plat s : starters) {
+                    if (entree.getId() == s.getId() && (qt <= s.getQtPlat()) && (qt > 0)) {
+                        s.setQtPlat(s.getQtPlat() - qt);
+                        System.out.printf("Commande : %d %n   nom plat : %s %n   qté commandée : %d %n   qté restante : %d %n",
+                                commande.getId(), s.getNomPlat(), qt, s.getQtPlat());
+                    } else if (entree.getId() == s.getId() && qt > 0) {
+                        System.out.println("Entree : " + s.getNomPlat() + " --> NON DISPONIBLE");
+                    }
+                }
+            }
+            ArrayList<OrderPart> listePlat = commande.getPlats();
+
+            for (OrderPart plat : listePlat) {
+                Integer qt2 = plat.getQty().intValue();
+                for (Plat mc : main_courses) {
+                    if (plat.getId() == mc.getId() && (qt2 <= mc.getQtPlat()) && (qt2 > 0)) {
+                        mc.setQtPlat(mc.getQtPlat() - qt2);
+                        System.out.printf("Commande : %d %n   nom plat : %s %n   qté commandée : %d %n   qté restante : %d %n",
+                                commande.getId(), mc.getNomPlat(), qt2, mc.getQtPlat());
+                    } else if (plat.getId() == mc.getId() && qt2 > 0) {
+                        System.out.println("PLat : " + mc.getNomPlat() + " --> NON DISPONIBLE ");
+                    }
+                }
+            }
+            ArrayList<OrderPart> listeDessert = commande.getDesserts();
+
+            for (OrderPart dessert : listeDessert) {
+                Integer qt3 = dessert.getQty().intValue();
+                for (Plat d : desserts) {
+                    if (dessert.getId() == d.getId() && (qt3 <= d.getQtPlat()) && (qt3 > 0)) {
+                        d.setQtPlat(d.getQtPlat() - qt3);
+                        System.out.printf("Commande : %d %n   nom plat : %s %n   qté commandée : %d %n   qté restante : %d %n",
+                                commande.getId(), d.getNomPlat(), qt3, d.getQtPlat());
+                    } else if (dessert.getId() == d.getId() && qt3 > 0) {
+                        System.out.println("Dessert : " + d.getNomPlat() + " --> NON DISPONIBLE");
+                    }
                 }
             }
         }
-        ArrayList<OrderPart> listePlat = commande.getPlats();
-
-        for (OrderPart plat : listePlat) {
-            Integer qt2 = plat.getQty().intValue();
-            for (Plat mc : main_courses) {
-                if (plat.getId() == mc.getId() && (qt2 <= mc.getQtPlat()) && (qt2 > 0)) {
-                    mc.setQtPlat(mc.getQtPlat() - qt2);
-                    System.out.printf("Commande : %d %n   nom plat : %s %n   qté commandée : %d %n   qté restante : %d %n",
-                            commande.getId(), mc.getNomPlat(), qt2, mc.getQtPlat());
-                } else if (plat.getId() == mc.getId() && qt2 > 0) {
-                    System.out.println("PLat : " + mc.getNomPlat() + " --> NON DISPONIBLE ");
-                }
-            }
-        }
-        ArrayList<OrderPart> listeDessert = commande.getDesserts();
-
-        for (OrderPart dessert : listeDessert) {
-            Integer qt3 = dessert.getQty().intValue();
-            for (Plat d : desserts) {
-                if (dessert.getId() == d.getId() && (qt3 <= d.getQtPlat()) && (qt3 > 0)) {
-                    d.setQtPlat(d.getQtPlat() - qt3);
-                    System.out.printf("Commande : %d %n   nom plat : %s %n   qté commandée : %d %n   qté restante : %d %n",
-                            commande.getId(), d.getNomPlat(), qt3, d.getQtPlat());
-                } else if (dessert.getId() == d.getId() && qt3 > 0) {
-                    System.out.println("Dessert : " + d.getNomPlat() + " --> NON DISPONIBLE");
-                }
-            }
-        }
-
     }
 }

@@ -9,10 +9,10 @@ package com.mycompany.mavenproject2;
  * @author maevadesfours
  */
 class Mavenproject2 {
-
+    
+    //dans le main on va exécuter la classe fenetre qui contient l'interface avec la gestion des boutons et des commandes
     public static void main(String[] args) {
-       //LireJson lire = new LireJson();
-
+       
        Fenetre f = new Fenetre(); 
        
     }

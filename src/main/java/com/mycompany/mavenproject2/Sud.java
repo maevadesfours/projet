@@ -22,6 +22,7 @@ import javax.swing.JPanel;
  * @author maevadesfours
  */
 public class Sud extends JPanel {
+    //création d'un JPanel que l'on placera par la suite au sud de l'interface
     
     private JButton annulé;
     private JButton validé;
@@ -29,41 +30,42 @@ public class Sud extends JPanel {
     
     public Sud(){
    
-        this.annulé = new JButton ("    Annuler    ");
+        this.annulé = new JButton ("     Annuler     ");
+        //création du bouton annulé sous forme de JButton
 
-        annulé.setBackground(Color.RED);
-        annulé.setOpaque(true);
-        annulé.setBorder(BorderFactory.createEmptyBorder(10, 70, 10, 70));
-        Font police1 = new Font("Courier New", Font.BOLD, 20);
-        annulé.setForeground(Color.BLACK);
-            annulé.setFont(police1);
-        annulé.setLayout(new FlowLayout());
-        this.add(annulé);
+        annulé.setBackground(Color.RED);//choix de la couleur (rouge)
+        annulé.setOpaque(true);//ajout de l'opacité sinon les couleurs ne fonctionnent pas sur mac
+        annulé.setBorder(BorderFactory.createRaisedBevelBorder());//choix de la bordure du bouton
+        Font police1 = new Font("Courier New", Font.BOLD, 23);//création de la police 
+        annulé.setForeground(Color.BLACK);//couleur de l'écriture (noire)
+            annulé.setFont(police1);//ajout de la police choisie précédement au bouton 
+        this.add(annulé);//ajouter le bouton au Sud 
         
-        
-        this.validé = new JButton ("Valider le menu");
+        //création du bouton validé
+        // même méthode que précédement
+        this.validé = new JButton ("    Valider le menu    ");
         
         validé.setBackground(Color.GREEN);
         validé.setOpaque(true);
-        validé.setBorder(BorderFactory.createEmptyBorder(10, 70, 10, 70));
-        Font police = new Font("Courier New", Font.BOLD, 20);
+        validé.setBorder(BorderFactory.createRaisedBevelBorder());
         validé.setForeground(Color.BLACK);
-            validé.setFont(police);
+            validé.setFont(police1);
         
         this.add(validé);
         
-        
-        this.commande = new JButton("Gestion commandes");
+        //création du bouton gestion des commandes
+        // même méthode que précédement
+        this.commande = new JButton("   Gestion commandes   ");
         
         commande.setBackground(Color.yellow);
         commande.setOpaque(true);
-        commande.setBorder(BorderFactory.createEmptyBorder(10, 70, 10, 70));
-        Font police2= new Font("Courier New", Font.BOLD, 20);
+        commande.setBorder(BorderFactory.createRaisedBevelBorder());
         commande.setForeground(Color.BLACK);
-            commande.setFont(police2);
+            commande.setFont(police1);
         this.add(commande);
      } 
 
+    //on génère les guetters pour détécter lorsque les bouttons sont déclanchés
     public JButton getAnnulé() {
         return annulé;
     }
