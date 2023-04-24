@@ -27,6 +27,7 @@ public class Centre extends Box {
         super(BoxLayout.LINE_AXIS);
         this.setUpAndDisplay();
         
+        //j'ai essayer de 
         /*
         panel = new JPanel ();
         panel.setBounds(40,50,150,150);
@@ -34,7 +35,6 @@ public class Centre extends Box {
         panel.setOpaque(true);
         //panel.setBorderPainted(false);
         this.add(panel);*/
-        
         
     }    
         

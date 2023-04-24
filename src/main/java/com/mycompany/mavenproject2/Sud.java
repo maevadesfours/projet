@@ -5,18 +5,10 @@
 package com.mycompany.mavenproject2;
 
 import java.awt.Color;
-import static java.awt.Color.green;
-import static java.awt.Color.white;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-
 /**
  *
  * @author maevadesfours

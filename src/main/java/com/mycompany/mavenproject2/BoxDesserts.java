@@ -4,47 +4,43 @@
  */
 package com.mycompany.mavenproject2;
 
-import java.awt.Color;
-import static java.awt.Component.CENTER_ALIGNMENT;
 import java.awt.Font;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 /**
  *
  * @author maevadesfours
  */
 public class BoxDesserts extends Box{
-    
+    //utilisation d'une box verticale pour faire apparaitre les éléments choisis les uns au-dessus des autres
    
     private SaisieD saisie1;
     private SaisieD saisie2;
     private SaisieD saisie3;
     private SaisieD saisie4;
     
-    
     public BoxDesserts(){
-        super(BoxLayout.PAGE_AXIS);
+        super(BoxLayout.PAGE_AXIS);//alignement des éléments verticalement
+        // 1 Jlabel pour afficher le nom de la box: DESSERT
+        // ensuite affichage de 4 JPanel SaisieD
+        // pour permettre d'entrer le nom des desserts et leurs quantités
         
-        
-        JLabel plats = new JLabel ("Les desserts");
-    
-        
-        plats.setOpaque(true);
-        plats.setBorder(BorderFactory.createEmptyBorder(15, 100, 15, 100));
+        JLabel dessert = new JLabel ("Les desserts");
+        //mise en forme de JLabel (choix police, couleur, taille...)
+        dessert.setOpaque(true);
+        dessert.setBorder(BorderFactory.createEmptyBorder(15, 100, 15, 100));
         Font police = new Font("Arial", Font.BOLD, 25);
-        plats.setFont(police);
-            
-        //plats.setAlignmentX(CENTER_ALIGNMENT);
-        this.add(plats);
+        dessert.setFont(police);
+        dessert.setAlignmentX(CENTER_ALIGNMENT);//permet d'aligner correctement la box
         
+        this.add(dessert);
         this.setUpAndDisplay();
         
      }
-        
+    //affichage des 4 champs de saisie     
     public void setUpAndDisplay(){
         
         saisie1 = new SaisieD();
@@ -61,10 +57,9 @@ public class BoxDesserts extends Box{
         this.add(saisie2);
         this.add(saisie3);
         this.add(saisie4);
-        
-    
     }
-
+    
+    //on place des guetters pour récupérer les données entrées dans les champs de saisies
     public SaisieD getSaisie1() {
         return saisie1;
     }

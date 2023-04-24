@@ -16,30 +16,32 @@ import javax.swing.JLabel;
  * @author maevadesfours
  */
 public class BoxPlats extends Box{
-    
+//utilisation d'une box verticale pour faire apparaitre les éléments choisis les uns au-dessus des autres    
    
     private SaisieP saisie1;
     private SaisieP saisie2;
     private SaisiePoisson saisie3;
     
     
-    
     public BoxPlats(){
-        super(BoxLayout.PAGE_AXIS);
+        super(BoxLayout.PAGE_AXIS);//alignement des éléments verticalement
+        // 1 Jlabel pour afficher le nom de la box: PLATS
+        // ensuite affichage de 2 JPanel SaisieP puis 1 JPanel SaisiePoisson
+        // pour permettre d'entrer le nom des plats et leurs quantités (idem pour le poisson)
         
         JLabel plats = new JLabel ("Les plats");
-    
-        
+        //mise en forme de JLabel (choix police, couleur, taille...)
         plats.setOpaque(true);
         plats.setBorder(BorderFactory.createEmptyBorder(15, 100, 15, 100));
         Font police = new Font("Arial", Font.BOLD, 25);
         plats.setFont(police);
             
-        plats.setAlignmentX(CENTER_ALIGNMENT);
+        plats.setAlignmentX(CENTER_ALIGNMENT);//permet d'aligner correctement la box
+        
         this.add(plats);
         this.setUpAndDisplay();
      }
-        
+    //affichage des 3 champs de saisie     
     public void setUpAndDisplay(){
         
         saisie1 = new SaisieP();
@@ -55,7 +57,7 @@ public class BoxPlats extends Box{
         this.add(saisie3);
         
     }
-
+    //on place des guetters pour récupérer les données entrées dans les champs de saisies
     public SaisieP getSaisie1() {
         return saisie1;
     }
@@ -67,7 +69,6 @@ public class BoxPlats extends Box{
     public SaisiePoisson getSaisie3() {
         return saisie3;
     }
-    
-    
+
 }
 
