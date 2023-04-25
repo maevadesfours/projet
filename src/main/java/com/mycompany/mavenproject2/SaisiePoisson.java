@@ -5,11 +5,9 @@
 package com.mycompany.mavenproject2;
 
 import java.awt.Color;
-import java.awt.FlowLayout;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
 /**
  *
  * @author maevadesfours
@@ -23,7 +21,7 @@ public class SaisiePoisson extends JPanel {
     public SaisiePoisson(){
         //création du JTextField pour le nom 
         JTextField poisson = new JTextField ("   Poisson du jour    ");
-        poisson.setLayout(new FlowLayout());
+        
         //design du JTextField  
         poisson.setBackground(Color.GRAY);
         poisson.setOpaque(true);
@@ -34,7 +32,7 @@ public class SaisiePoisson extends JPanel {
         
         //création du JTextField pour la quantité 
         JTextField quantité = new JTextField ("Qt ");
-        quantité.setLayout(new FlowLayout());
+        
         //design du JTextField
         quantité.setBackground(Color.GRAY);
         quantité.setOpaque(true);
@@ -47,10 +45,8 @@ public class SaisiePoisson extends JPanel {
     public JTextField getPoisson() {
         return poisson;
     }
-
     public JTextField getQt() {
         return qt;
     }
-    
 }
 
