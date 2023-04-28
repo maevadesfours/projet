@@ -1,48 +1,48 @@
 {
     "desserts": [{
-            "qty": 1,
+            "qty": 3,
             "description": "H",
             "id": 1
         }, {
-            "qty": 1,
+            "qty": 3,
             "description": "I",
             "id": 2
         }, {
-            "qty": 1,
+            "qty": 3,
             "description": "J",
             "id": 3
         }, {
-            "qty": 1,
+            "qty": 3,
             "description": "K",
             "id": 4
         }],
     "starters": [{
-            "qty": 1,
-            "description": "A",
+            "qty": 3,
+            "description": "A ",
             "id": 1
         }, {
-            "qty": 1,
+            "qty": 3,
             "description": "B",
             "id": 2
         }, {
-            "qty": 1,
+            "qty": 3,
             "description": "C",
             "id": 3
         }, {
-            "qty": 1,
+            "qty": 3,
             "description": "D",
             "id": 4
         }],
     "main_courses": [{
-            "qty": 1,
+            "qty": 3,
             "description": "E",
             "id": 1
         }, {
-            "qty": 1,
+            "qty": 3,
             "description": "F",
             "id": 2
         }, {
-            "qty": 1,
+            "qty": 3,
             "description": "G",
             "id": 3
         }]

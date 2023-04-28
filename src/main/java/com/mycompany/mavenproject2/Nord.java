@@ -10,17 +10,19 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
-
 /**
  *
  * @author maevadesfours
  */
+//PARTIE NORD DE L'INTERFACE GRAPHIQUE
 public class Nord extends Box{
+//utilisation d'une box pour regrouper les éléments choisis dans cet espace 
+//soit ici 2 JLabel
     
     public Nord(){
-        super(BoxLayout.PAGE_AXIS);
+        super(BoxLayout.PAGE_AXIS);// alignement vertical des éléments dans la box
         
-        JLabel resto = new JLabel ("El Ristaurante");
+        JLabel resto = new JLabel ("El Ristorante");
     
         resto.setBackground(Color.BLACK);
         resto.setOpaque(true);
