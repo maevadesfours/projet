@@ -12,18 +12,17 @@ import java.awt.BorderLayout;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+// création d'une JFrame fenêtre (c'est la fenêtre ouvrant l'interface graphique)
+// permet de gérer les différentes fonctionnalitées utilisées lors de ce projet 
+
 public class Fenetre extends JFrame {
 
-    private JPanel pan = new JPanel();
-    private JButton bouton = new JButton("MON RESTAURANT");
     private Nord nord;
     private Sud sud;
     private Centre centre;
@@ -41,19 +40,23 @@ public class Fenetre extends JFrame {
         nord = new Nord();
         sud = new Sud();
         centre = new Centre();
+        
+        // MISE EN FORME DE L'INTERFACE 
         this.setLayout(new BorderLayout(10, 10));
-        getContentPane().add(nord, BorderLayout.NORTH);
-        getContentPane().add(sud, BorderLayout.SOUTH);
-        getContentPane().add(centre, BorderLayout.CENTER);
+        getContentPane().add(nord, BorderLayout.NORTH);// ajout de la Box nord au nord de l'interface
+        getContentPane().add(sud, BorderLayout.SOUTH);// ajout de la Box Sud au sud de l'interface
+        getContentPane().add(centre, BorderLayout.CENTER);// ajout de la Box Centre au centre de l'interface
 
-        this.setTitle("El Ristorante");
-        this.setSize(1000, 700);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setTitle("El Ristorante");// nom de la fenêtre 
+        this.setSize(1000, 700);// taille de la fenêtre
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//arrêt de la JFrame "fenêtre" lorsqu'on sort de l'interface
         this.setLocationRelativeTo(null);
-        this.setVisible(true);
+        this.setVisible(true);// permet d'être visible
 
-        //programmmation du bouton annulé 
+        // programmmation du bouton ANNULE 
         // il remet chaque champs de saisie TextField à sa valeur initiale 
+        // on utilise tous les guetters pour remonter au champs de saisis 
+        // puis on remet le champs à sa valeur de départ  
         sud.getAnnulé().addActionListener(l -> {
             centre.getBoxE().getSaisie1().getEntree().setText("Saisissez une entrée ");
             centre.getBoxE().getSaisie2().getEntree().setText("Saisissez une entrée ");
@@ -90,7 +93,8 @@ public class Fenetre extends JFrame {
             gestionCommandes();
         });
 
-        // prgrammation du bouton validé, dans une boucle try/catch
+        // programmation du bouton VALIDE
+        //dans une boucle try/catch
         sud.getValidé().addActionListener(e -> {
 
             try {
@@ -101,6 +105,7 @@ public class Fenetre extends JFrame {
                 //permet de retrouver le nom de l'entrée saisie par l'utilisateur 
                 int qtEntree1 = Integer.parseInt(centre.getBoxE().getSaisie1().getQt().getText().trim());
                 //permet de retrouver la quantité d'entrée saisie par l'utilisateur 
+                // Integer.parseInt: permet d'avoir des entiers et non des string et enlève les espaces 
 
                 //tester que l'utilisateur a bien saisi un plat, sinon il annule ce champs de saisie en mettant la qt=0
                 if (nomEntree1.equalsIgnoreCase("Saisissez une entrée ")) {
@@ -210,7 +215,7 @@ public class Fenetre extends JFrame {
                 desserts.add(d4);
 
                 try (PrintWriter out = new PrintWriter(new FileWriter("menu.json"))) {
-                    // utilisation de PrintWriter car FileWriter uniquement ne fonctionne pas sur mac
+                    // utilisation de PrintWriter (car FileWriter uniquement ne fonctionne pas sur mac)
 
                     //création d'un JSONObject
                     JSONObject json = new JSONObject();
@@ -261,29 +266,44 @@ public class Fenetre extends JFrame {
     }
 
     public void gestionCommandes() {
-        System.out.println("Dans la gestion des commandes");
-        File rep = new File(System.getProperty("user.dir"));
+        System.out.println("Dans la gestion des commandes");// dans la console 
+        File rep = new File(System.getProperty("user.dir"));//choix du répertoire dans lequel il y a les fichiers à récupérer
         String[] commandes = rep.list((dir, name) -> name.matches("order_[0-9]+.json"));
+        //recherche des fichiers commande qui sont nommés ("order_"nombre".json")
         
             for (String com : commandes) {
             Commande commande = new Commande(com);
 
-            ArrayList<OrderPart> listeEntree = commande.getEntrees();
+            ArrayList<OrderPart> listeEntree = commande.getEntrees();// traitement de l'arraylist contenant les entrées
+            //on utilise des JSONObject OrderPart pour traiter chaque plat  
 
             for (OrderPart entree : listeEntree) {
-                Integer qt = entree.getQty().intValue();
-                for (Plat s : starters) {
+                Integer qt = entree.getQty().intValue();//on passe la quantité commandé sous forme d'entier
+                for (Plat s : starters) {   //on traite chaque plat de l'arraylist starters
+                    //MISE A JOUR DES QUANTITEES
                     if (entree.getId() == s.getId() && (qt <= s.getQtPlat()) && (qt > 0)) {
                         s.setQtPlat(s.getQtPlat() - qt);
+                        
+                        //si l'identifiant de l'entrée dans l'arraylist des entrées choisies par la cuisine 
+                        //est identique à l'identifiant de l'entree saisie dans la commande la salle
+                        // ET si la quantité commandé est bien inférieure à la quantité disponible
+                        // ET si la quantité disponible est bien supérieure à 0 (éviter une quantité négative)
+                        //ALORS : on met la quantité égale à la quantité initiale moins la quantité commandé 
+                        
                         System.out.printf("Commande : %d %n   nom plat : %s %n   qté commandée : %d %n   qté restante : %d %n",
                                 commande.getId(), s.getNomPlat(), qt, s.getQtPlat());
+                                //affichage dans la console du suivi des commandes avec les quantités des plats mise à jour
                     } else if (entree.getId() == s.getId() && qt > 0) {
+                        //si pour une même entrée la quantité de celle-ci est inférieure à 0
+                        //on affiche que cette entrée est indisponible 
                         System.out.println("Entree : " + s.getNomPlat() + " --> NON DISPONIBLE");
                     }
                 }
             }
             ArrayList<OrderPart> listePlat = commande.getPlats();
-
+            // traitement de l'arraylist contenant les plats
+            //MEME METHODE QUE PRECEDEMENT
+            
             for (OrderPart plat : listePlat) {
                 Integer qt2 = plat.getQty().intValue();
                 for (Plat mc : main_courses) {
@@ -297,7 +317,9 @@ public class Fenetre extends JFrame {
                 }
             }
             ArrayList<OrderPart> listeDessert = commande.getDesserts();
-
+            // traitement de l'arraylist contenant les desserts
+            //MEME METHODE QUE PRECEDEMENT
+            
             for (OrderPart dessert : listeDessert) {
                 Integer qt3 = dessert.getQty().intValue();
                 for (Plat d : desserts) {
