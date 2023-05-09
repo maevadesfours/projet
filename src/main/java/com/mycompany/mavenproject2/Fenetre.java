@@ -55,8 +55,10 @@ public class Fenetre extends JFrame {
 
         // programmmation du bouton ANNULE 
         // il remet chaque champs de saisie TextField à sa valeur initiale 
-        // on utilise tous les guetters pour remonter au champs de saisis 
+        // on utilise tous les guetters pour remonter au champs de saisie 
         // puis on remet le champs à sa valeur de départ  
+        
+        
         sud.getAnnulé().addActionListener(l -> {
             centre.getBoxE().getSaisie1().getEntree().setText("Saisissez une entrée ");
             centre.getBoxE().getSaisie2().getEntree().setText("Saisissez une entrée ");
@@ -87,6 +89,8 @@ public class Fenetre extends JFrame {
             centre.getBoxD().getSaisie4().getQt().setText("Qt ");
 
         });
+        
+        
         //programmation du bouton gestion des commandes par la fonction gestionCommandes() définie plus bas
         //lors de l'activation de ce bouton il va déclacher la fonction gestionCommandes()
         sud.getCde().addActionListener((e) -> {
@@ -268,11 +272,10 @@ public class Fenetre extends JFrame {
     public void gestionCommandes() {
         System.out.println("Dans la gestion des commandes");// dans la console 
         File rep = new File(System.getProperty("user.dir"));//choix du répertoire dans lequel il y a les fichiers à récupérer
-        String[] commandes = rep.list((dir, name) -> name.matches("order_[0-9]+.json"));
+        String[] commandes = rep.list((dir, name) -> name.matches("order_(.*).json"));
         //recherche des fichiers commande qui sont nommés ("order_"nombre".json")
-        
             for (String com : commandes) {
-            Commande commande = new Commande(com);
+                Commande commande = new Commande(com);
 
             ArrayList<OrderPart> listeEntree = commande.getEntrees();// traitement de l'arraylist contenant les entrées
             //on utilise des JSONObject OrderPart pour traiter chaque plat  
@@ -290,7 +293,7 @@ public class Fenetre extends JFrame {
                         // ET si la quantité disponible est bien supérieure à 0 (éviter une quantité négative)
                         //ALORS : on met la quantité égale à la quantité initiale moins la quantité commandé 
                         
-                        System.out.printf("Commande : %d %n   nom plat : %s %n   qté commandée : %d %n   qté restante : %d %n",
+                        System.out.printf("Commande : %s %n   nom plat : %s %n   qté commandée : %d %n   qté restante : %d %n",
                                 commande.getId(), s.getNomPlat(), qt, s.getQtPlat());
                                 //affichage dans la console du suivi des commandes avec les quantités des plats mise à jour
                     } else if (entree.getId() == s.getId() && qt > 0) {
@@ -309,7 +312,7 @@ public class Fenetre extends JFrame {
                 for (Plat mc : main_courses) {
                     if (plat.getId() == mc.getId() && (qt2 <= mc.getQtPlat()) && (qt2 > 0)) {
                         mc.setQtPlat(mc.getQtPlat() - qt2);
-                        System.out.printf("Commande : %d %n   nom plat : %s %n   qté commandée : %d %n   qté restante : %d %n",
+                        System.out.printf("Commande : %s %n   nom plat : %s %n   qté commandée : %d %n   qté restante : %d %n",
                                 commande.getId(), mc.getNomPlat(), qt2, mc.getQtPlat());
                     } else if (plat.getId() == mc.getId() && qt2 > 0) {
                         System.out.println("PLat : " + mc.getNomPlat() + " --> NON DISPONIBLE ");
@@ -325,7 +328,7 @@ public class Fenetre extends JFrame {
                 for (Plat d : desserts) {
                     if (dessert.getId() == d.getId() && (qt3 <= d.getQtPlat()) && (qt3 > 0)) {
                         d.setQtPlat(d.getQtPlat() - qt3);
-                        System.out.printf("Commande : %d %n   nom plat : %s %n   qté commandée : %d %n   qté restante : %d %n",
+                        System.out.printf("Commande : %s %n   nom plat : %s %n   qté commandée : %d %n   qté restante : %d %n",
                                 commande.getId(), d.getNomPlat(), qt3, d.getQtPlat());
                     } else if (dessert.getId() == d.getId() && qt3 > 0) {
                         System.out.println("Dessert : " + d.getNomPlat() + " --> NON DISPONIBLE");
