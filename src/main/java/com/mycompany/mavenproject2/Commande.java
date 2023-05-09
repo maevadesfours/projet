@@ -43,13 +43,8 @@ public class Commande {
             JSONObject jsonO = (JSONObject) jsonP.parse(new FileReader(filename));
             // nouvel object JSON récupéré à partir du fichier choisi (filename)
             
-            //this.id2 =Long.parseLong((String) jsonO.get("id"));// on récupère l'identifiant de la commande 
-            //System.out.println(id2);
-           
-            //if (id2==0){
                 this.id1 =(String) jsonO.get("id");// on récupère l'identifiant de la commande 
                 System.out.println(id1); 
-            //}
             
             JSONArray starters = (JSONArray) jsonO.get("starters");//étude des donnés de starters dans une JSONArray
                                                                       //récupération des entrées 
