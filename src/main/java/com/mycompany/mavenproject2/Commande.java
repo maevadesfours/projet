@@ -115,10 +115,6 @@ public class Commande {
         return id;
     }
 
-    public Long getId2() {
-        return id2;
-    }
-
     public ArrayList<OrderPart> getEntrees() {
         return entrees;
     }
