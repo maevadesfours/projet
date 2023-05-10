@@ -20,8 +20,7 @@ import org.json.simple.parser.ParseException;
 // création de la classe Commande 
 // afin de récupérer les donnés founis dans les commandes recu par la salle 
 public class Commande {
-    String id1;
-    Long id2;
+    String id;
     ArrayList<OrderPart> entrees;
     ArrayList<OrderPart> plats;
     ArrayList<OrderPart> desserts;
@@ -43,8 +42,8 @@ public class Commande {
             JSONObject jsonO = (JSONObject) jsonP.parse(new FileReader(filename));
             // nouvel object JSON récupéré à partir du fichier choisi (filename)
             
-                this.id1 =(String) jsonO.get("id");// on récupère l'identifiant de la commande 
-                System.out.println(id1); 
+                this.id =(String) jsonO.get("id");// on récupère l'identifiant de la commande 
+                System.out.println(id); 
             
             JSONArray starters = (JSONArray) jsonO.get("starters");//étude des donnés de starters dans une JSONArray
                                                                       //récupération des entrées 
@@ -113,7 +112,7 @@ public class Commande {
     
     //génération des guetters 
     public String getId() {
-        return id1;
+        return id;
     }
 
     public Long getId2() {
